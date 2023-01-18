@@ -36,7 +36,7 @@ const FormError = ({ name }) => {
 
 class ContactForm extends Component {
   handleSubmit = (values, { resetForm }) => {
-    console.log(values);
+    // console.log(values);
     this.props.onSubmit(values);
     resetForm();
   };
