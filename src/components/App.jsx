@@ -4,22 +4,17 @@ import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import { nanoid } from 'nanoid';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import useLocalStorage from 'hooks/useLocalStorage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import contactsDb from '../db/contacts.json';
 
 export default function App() {
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem('contacts')) ?? contactsDb
-  );
+  const [contacts, setContacts] = useLocalStorage('contacts', contactsDb);
 
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const addContact = ({ name, number }) => {
     const contact = {
